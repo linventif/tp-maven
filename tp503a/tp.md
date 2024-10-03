@@ -58,7 +58,6 @@ Then, you need to add this file in the jar with `maven-jar-plugin` in `pom.xml`
   <artifactId>maven-jar-plugin</artifactId>
   <version>3.1.0</version>
   <configuration>
-
 </plugin>
 ```
 
