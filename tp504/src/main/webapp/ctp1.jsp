@@ -1,4 +1,5 @@
 <%@ page import="java.util.concurrent.atomic.AtomicInteger" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%
     // Déclaration des variables de session et d'application
     // Récupérer ou initialiser le compteur de session
