@@ -57,6 +57,7 @@ public class BDD extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Connexion Impossible");
+            out.println("Connexion Impossible");
         }
         out.println("</center></body></html>");
     }
