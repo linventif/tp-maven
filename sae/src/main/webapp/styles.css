@@ -1,0 +1,14 @@
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+td {
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+td.current-month {
+    background-color: #f0f8ff;
+}

@@ -40,7 +40,6 @@ public class Verif extends HttpServlet {
             preparedStatement.setString(1, ip);
             preparedStatement.setString(2, login);
             preparedStatement.executeUpdate();
-
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Connexion Impossible");
