@@ -27,10 +27,13 @@ public class CalendarServlet extends HttpServlet {
         int month = monthParam != null ? Integer.parseInt(monthParam) : currentDate.getMonthValue();
         month = Math.max(1, Math.min(12, month));
         int year = yearParam != null ? Integer.parseInt(yearParam) : currentDate.getYear();
+        year = Math.max(1970, year);
 
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             System.out.println("Connexion Effective !");
+//            create table calendar (dat date primary key, value int);
+
 
             String dayToIncrement = request.getParameter("day");
             if (dayToIncrement != null) {
