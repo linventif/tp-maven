@@ -4,19 +4,22 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>fr.but3</groupId>
-  <artifactId>tp505Exo1</artifactId>
+  <artifactId>tp505Exo3</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
 
-  <name>tp505Exo1</name>
+  <name>tp505Exo3</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
   <properties>
-<maven.compiler.source>17</maven.compiler.source>
-<maven.compiler.target>17</maven.compiler.target>
-<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<exec.mainClass>${project.groupId}.App</exec.mainClass>
-</properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <exec.mainClass>${project.groupId}.App</exec.mainClass>
+    <failOnMissingWebXml>false</failOnMissingWebXml>
+    <cargo.maven.containerId>tomcat10x</cargo.maven.containerId>
+  </properties>
 
   <dependencyManagement>
     <dependencies>
@@ -50,19 +53,42 @@
     </dependency>
     <!-- EclipseLink -->
     <dependency>
-    <groupId>org.eclipse.persistence</groupId>
-    <artifactId>org.eclipse.persistence.jpa</artifactId>
-    <version>4.0.3</version>
+        <groupId>org.eclipse.persistence</groupId>
+        <artifactId>org.eclipse.persistence.jpa</artifactId>
+        <version>4.0.3</version>
     </dependency>
     <!-- postgresql -->
     <dependency>
-    <groupId>org.postgresql</groupId>
-    <artifactId>postgresql</artifactId>
-    <version>42.7.4</version>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>42.7.4</version>
+    </dependency>
+    <dependency>
+        <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
+        <version>5.0.0</version>
+        <scope>provided</scope>
     </dependency>
   </dependencies>
 
   <build>
+      <finalName>tp505Exo3</finalName>
+      <plugins>
+        <plugin>
+            <groupId>org.codehaus.cargo</groupId>
+            <artifactId>cargo-maven3-plugin</artifactId>
+            <version>1.10.9</version>
+        </plugin>
+        <!-- A ajouter à cause de la version Maven < 3.8 -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.4.0</version>
+            <configuration>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+        </plugin>
+      </plugins>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
