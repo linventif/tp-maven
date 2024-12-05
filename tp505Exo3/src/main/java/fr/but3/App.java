@@ -22,5 +22,8 @@ public class App {
         for (Livre l : auteur.getLivres()) {
             System.out.println(l);
         }
+
+        em.close();
+        emf.close();
     }
 }

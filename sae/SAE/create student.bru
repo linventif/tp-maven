@@ -1,0 +1,20 @@
+meta {
+  name: create student
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/etudiants
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "prenom": "John",
+      "nom": "Doe",
+      "age":  0,
+      "groupe": "A1"
+  }
+}
