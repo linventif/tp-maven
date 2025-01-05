@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -60,8 +61,15 @@ public class Security {
         return new JdbcUserDetailsManager(dataSource);
     }
 
+    // EXO 2
+    //    @Bean
+    //    public PasswordEncoder encoder() {
+    //        return new BCryptPasswordEncoder();
+    //    }
+
+    // EXO 4
     @Bean
     public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
