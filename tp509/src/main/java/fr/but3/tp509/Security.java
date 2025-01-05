@@ -12,9 +12,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -38,15 +41,23 @@ public class Security {
                 .build();
     }
 
-    // to get the hash of the password use: spring help encodepassword : spring encodepassword -a bcrypt admin
+    // EXO 2
+    //    // to get the hash of the password use: spring help encodepassword : spring encodepassword -a bcrypt admin
+    //    @Bean
+    //    public UserDetailsService mesUtilisateurs() {
+    //        UserDetails user1 = User.withUsername("admin")
+
+    /// /                .password("$2a$10$oe4lY6mKDCx/.QJLl79kzefrRJY//N0yRuruwaTqkWzfCjn2cvBg6") // solution: admin
+    //                .password(encoder().encode("admin"))
+    //                .roles("ADMIN")
+    //                .build();
+    //        return new InMemoryUserDetailsManager(user1);
+    //    }
+
+    // EXO 3
     @Bean
-    public UserDetailsService mesutilisateurs() {
-        UserDetails user1 = User.withUsername("admin")
-//                .password("$2a$10$oe4lY6mKDCx/.QJLl79kzefrRJY//N0yRuruwaTqkWzfCjn2cvBg6") // solution: admin
-                .password(encoder().encode("admin"))
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user1);
+    public UserDetailsService mesUtilisateurs(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource);
     }
 
     @Bean
