@@ -28,14 +28,22 @@ public class Security {
                         .requestMatchers(mvc.pattern("/public")).permitAll()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults())
+                .formLogin(Customizer.withDefaults())
+//                after /logout, redirect to /public
+                .logout(logout -> logout.logoutSuccessUrl("/public"))
+                .rememberMe(rememberMe -> rememberMe
+                        .key("uniqueAndSecret") // should be unique and secret and not hardcoded
+                        .tokenValiditySeconds(60 * 60 * 24) // 24 hours
+                )
                 .build();
     }
 
+    // to get the hash of the password use: spring help encodepassword : spring encodepassword -a bcrypt admin
     @Bean
     public UserDetailsService mesutilisateurs() {
-        UserDetails user1 = User.withUsername("user")
-                .password(encoder().encode("sonpassword"))
+        UserDetails user1 = User.withUsername("admin")
+//                .password("$2a$10$oe4lY6mKDCx/.QJLl79kzefrRJY//N0yRuruwaTqkWzfCjn2cvBg6") // solution: admin
+                .password(encoder().encode("admin"))
                 .roles("ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(user1);
