@@ -57,9 +57,19 @@ public class Security {
 
     // EXO 3
     @Bean
-    public UserDetailsService mesUtilisateurs(DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource);
+    public JdbcUserDetailsManager userDetailsService(DataSource dataSource) {
+        JdbcUserDetailsManager userDetailsService = new JdbcUserDetailsManager(dataSource);
+        // Create a test user
+        if (!userDetailsService.userExists("testuser")) {
+            UserDetails user = User.withUsername("testuser")
+                    .password(encoder().encode("testpassword"))
+                    .roles("USER")
+                    .build();
+            userDetailsService.createUser(user);
+        }
+        return userDetailsService;
     }
+
 
     // EXO 2
     //    @Bean
